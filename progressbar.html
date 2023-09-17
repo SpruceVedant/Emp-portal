@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Progress Bar</title>
+    <link rel="stylesheet" href="progressbar.css">
+</head>
+<body>
+    <div class="video-container" id="video-container">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/FovtaTAPIZw?si=VZTZQuXRi0XRXaPj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+    <div class="progress-container">
+        <div class="progress-bar" id="progress"></div>
+    </div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const progressBar = document.getElementById("progress");
+            const totalTime = 9 * 60 * 1000; // 9 minutes in milliseconds
+            let startTime;
+            let isPlaying = false;
+            let timeoutId;
+
+            function updateProgressBar() {
+                const currentTime = Date.now();
+                const elapsedTime = currentTime - startTime;
+                const progress = (elapsedTime / totalTime) * 100;
+
+                if (progress <= 100) {
+                    progressBar.style.width = progress + "%";
+                    timeoutId = setTimeout(updateProgressBar, 100); // Update every 100ms
+                } else {
+                    progressBar.style.width = "100%";
+                }
+            }
+
+            function startProgressBar() {
+                if (!isPlaying) {
+                    isPlaying = true;
+                    startTime = Date.now();
+                    updateProgressBar();
+                }
+            }
+
+            function stopProgressBar() {
+                isPlaying = false;
+                clearTimeout(timeoutId);
+            }
+
+            // Add a click event listener to start/stop the progress bar when the video container is clicked
+            const videoContainer = document.getElementById("video-container");
+            videoContainer.addEventListener("click", () => {
+                if (isPlaying) {
+                    stopProgressBar();
+                } else {
+                    startProgressBar();
+                }
+            });
+        });
+    </script>
+</body>
+</html>

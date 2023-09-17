@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="index.css">
+    <title>Document</title>
+</head>
+<body>
+    <div class="admin-container">
+        <h2>Admin Profile</h2>
+        <div class="profile">
+            <!-- Display admin details here -->
+            <p>Name: Admin </p>
+            <p>Position: Administrator</p>
+            <p>Contact: admin@example.com</p>
+        </div>
+        <h2>Add Employee</h2>
+        <form id="employee-form">
+            <input type="text" id="firstName" placeholder="First Name" required>
+            <input type="text" id="lastName" placeholder="Last Name" required>
+            <input type="text" id="phoneNumber" placeholder="Phone Number (Numeric)">
+            <input type="email" id="employeeEmail" placeholder="Email (e.g., employee@example.com)" required>
+            <select id="country" required>
+                <option value="India">India</option>
+                <option value="USA">USA</option>
+                <option value="Canada">Canada</option>
+                <!-- Add country options dynamically if needed -->
+            </select>
+
+            <select id="state" required>
+                <option value="MH" selected>MH State</option>
+                <option value="MH" selected>Select State</option>
+                <option value="MH" selected>Select State</option>
+                <!-- Add state options dynamically based on the selected country -->
+            </select>
+
+            <input type="text" id="city" placeholder="City">
+
+            <button type="submit">Add Employee</button>
+        </form>
+        <a href="display.html">View</a>
+    </div>
+<div id="employee-list"></div>
+    <script src="index.js"></script>
+</body>
+</html>

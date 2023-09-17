@@ -1,0 +1,41 @@
+/* display.css */
+
+/* Reset some default styles */
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+}
+
+/* Style the header */
+h2 {
+    background-color: #333;
+    color: #fff;
+    padding: 10px;
+    text-align: center;
+}
+
+/* Style the container for the employee list */
+#employee-list {
+    background-color: #fff;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin: 20px;
+    padding: 20px;
+}
+
+/* Style individual employee items */
+.employee-item {
+    border-bottom: 1px solid #ccc;
+    padding: 10px 0;
+}
+
+/* Style employee names */
+.employee-name {
+    font-weight: bold;
+}
+
+/* Add some margin to the top of the first employee item */
+.employee-item:first-child {
+    margin-top: 0;
+}

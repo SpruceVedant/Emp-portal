@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Include necessary meta tags, stylesheets, and scripts -->
+</head>
+<body>
+    <section style="background-color: #eee;">
+        <div class="container py-5">
+            <div class="row">
+                <div class="col-lg-4">
+                    <!-- Employee profile card -->
+                </div>
+                <div class="col-lg-8">
+                    <!-- Employee details card -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script>
+        // Add JavaScript code to retrieve and display employee data based on the URL parameter (index)
+        document.addEventListener('DOMContentLoaded', function () {
+    const urlParams = new URLSearchParams(window.location.search);
+    const index = urlParams.get('index');
+
+    if (index !== null) {
+        const employeeData = JSON.parse(localStorage.getItem('employeeData')) || [];
+        const employee = employeeData[index];
+
+        if (employee) {
+            // Update profile card with employee data
+            document.getElementById('main-name').textContent = `${employee.firstName} ${employee.lastName}`;
+            document.getElementById('fullName').textContent = `${employee.firstName} ${employee.lastName}`;
+            document.getElementById('email').textContent = employee.email;
+            document.getElementById('phoneNumber').textContent = employee.phoneNumber;
+            document.getElementById('country').textContent = employee.country;
+            document.getElementById('country-name').textContent = `${employee.country}, ${employee.state}`;
+        } else {
+            // Employee not found
+            alert('Employee not found.');
+            window.location.href = '/'; // Redirect to the home page or handle as needed
+        }
+    } else {
+        // Index parameter not provided
+        alert('Employee index not provided.');
+        window.location.href = '/'; // Redirect to the home page or handle as needed
+    }
+});
+
+    </script>
+</body>
+</html>

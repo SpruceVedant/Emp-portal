@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Video Progress Tracking</title>
+</head>
+
+<body>
+    <div class="video">
+        <div id="player"></div>
+    </div>
+
+    <div class="progress">
+        <progress id="videoProgress" value="0" max="100"></progress>
+    </div>
+
+
+    <script>
+
+        function onYouTubeIframeAPIReady() {
+            const videoPlayer = new YT.Player('player', {
+                height: '315',
+                width: '560',
+                videoId: 'FovtaTAPIZw',
+                events: {
+                    'onReady': onPlayerReady,
+                    'onStateChange': onPlayerStateChange
+                }
+            });
+        }
+
+        let player;
+        let startTime;
+        let endTime;
+        function onPlayerReady(event) {
+            player = event.target;
+            player.playVideo();
+            startTime = new Date().getTime();
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data === YT.PlayerState.PAUSED || event.data === YT.PlayerState.ENDED) {
+                endTime = new Date().getTime();
+                const durationInSeconds = (endTime - startTime) / 1000;
+                const currentTime = player.getCurrentTime();
+                const duration = player.getDuration();
+                const percentageViewed = (currentTime / duration) * 100;
+                console.log(`Duration on page: ${durationInSeconds} seconds`);
+                console.log(`Percentage of video viewed: ${percentageViewed.toFixed(2)}%`);
+            }
+        }
+
+    </script>
+    <script src="https://www.youtube.com/iframe_api"></script>
+</body>
+
+</html>

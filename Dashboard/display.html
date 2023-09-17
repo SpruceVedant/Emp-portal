@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="display.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+        }
+
+        h2 {
+            text-align: center;
+            color: #007bff;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            background-color: #fff;
+        }
+
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+
+        th {
+            background-color: #007bff;
+            color: #fff;
+        }
+
+        tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        .employee-info {
+            padding: 10px;
+        }
+
+        .employee-info h3 {
+            color: #333;
+        }
+
+        .employee-info p {
+            margin: 5px 0;
+        }
+    </style>
+    <title>Employee Details</title>
+</head>
+<body>
+    <h2>Saved Data</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Employee</th>
+                <th>Name</th>
+                <th>Phone No</th>
+                <th>Email</th>
+                <th>Country</th>
+                <th>State</th>
+                <th>City</th>
+            </tr>
+        </thead>
+        <tbody id="employee-list">
+            <!-- Employee data rows will be inserted here dynamically using JavaScript -->
+        </tbody>
+    </table>
+
+    <script src="display.js"></script>
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div class="video">
+        <iframe width="560" height="315" src="https://www.youtube.com/embed/FovtaTAPIZw?si=VZTZQuXRi0XRXaPj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+    </div>
+    <div class="progress">
+        <progress id="videoProgress" value="0" max="100"></progress>
+    </div>
+    <script>
+       
+        const videoPlayer = document.getElementById('videoPlayer');
+        const videoProgress = document.getElementById('videoProgress');
+
+        videoPlayer.addEventListener('play', function () {
+            const savedProgress = localStorage.getItem('videoProgress');
+
+            if (savedProgress) {
+                videoPlayer.currentTime = parseFloat(savedProgress);
+            }
+
+            updateProgressBar();
+        });
+
+        videoPlayer.addEventListener('pause', function () {
+            localStorage.setItem('videoProgress', videoPlayer.currentTime);
+
+
+            clearInterval(progressBarInterval);
+        });
+
+        let progressBarInterval;
+        function updateProgressBar() {
+            progressBarInterval = setInterval(function () {
+                const currentTime = videoPlayer.currentTime;
+                const duration = videoPlayer.duration;
+
+                if (!isNaN(duration)) {
+                    const percentComplete = (currentTime / duration) * 100;
+                    videoProgress.value = percentComplete;
+                }
+            }, 1000);
+        }
+    </script>
+    <!-- <script>
+       
+        const videoPlayer = document.getElementById('videoPlayer');
+        videoPlayer.addEventListener('play', function () {
+            const savedProgress = localStorage.getItem('videoProgress');
+
+            if (savedProgress) {
+                videoPlayer.currentTime = parseFloat(savedProgress);
+            }
+        });
+
+        videoPlayer.addEventListener('pause', function () {
+            localStorage.setItem('videoProgress', videoPlayer.currentTime);
+        });
+    </script> -->
+
+</body>
+</html>
