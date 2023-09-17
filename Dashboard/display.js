@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const employeeRow = `
                 <tr>
                     <td>Employee ${index + 1}</td>
-                    <td>${employee.firstName} ${employee.lastName}</td>
+                    <td><a href="http://localhost:3001/Profile/Profile.html?employeeId=${index}">${employee.firstName} ${employee.lastName}</a></td>
                     <td>${employee.phoneNumber}</td>
                     <td>${employee.email}</td>
                     <td>${employee.country}</td>
@@ -28,6 +28,8 @@ document.addEventListener('DOMContentLoaded', function () {
 });
 
 
+
+
 // document.addEventListener('DOMContentLoaded' , function () {
 //     const employeeList = document.getElementById('employee-list');
 
@@ -36,13 +38,13 @@ document.addEventListener('DOMContentLoaded', function () {
 //     function display(data) {
 
 //         // employeeList.innerHTML = '';
-    
+
 //     if(data.length === 0){
 //         employeeList.innerHTML = '<p>No data<p>';
 //         return;
 
 //     }
-        
+
 
 //         data.forEach((employee, index) => {
 //             const employeeInfo = `
@@ -54,12 +56,12 @@ document.addEventListener('DOMContentLoaded', function () {
 //             <p>State ${employee.state} <p>
 //             <p> City ${employee.city} <p>
 //             <hr>
-        
+
 //             `;
 //             employeeList.innerHTML += employeeInfo;
 //         });
 //     }
-    
+
 
 //     display(savedData);
 // })

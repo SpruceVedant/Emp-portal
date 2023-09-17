@@ -15,9 +15,9 @@
                         <div class="card-body text-center">
                             <img src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-chat/ava3.webp" alt="avatar"
                                 class="rounded-circle img-fluid" style="width: 150px;">
-                            <h5 class="my-3" id="main-name">John Smith</h5>
-                            <p class="text-muted mb-1">Full Stack Developer</p>
-                            <p class="text-muted mb-4" id="country-name">Bay Area, San Francisco, CA</p>
+                            <h5 class="my-3" id="main-name"></h5>
+                            <p class="text-muted mb-1" id="job-title"></p>
+                            <p class="text-muted mb-4" id="country-name"></p>
                             <div class="d-flex justify-content-center mb-2">
                                 <a href="/Dashboard/display.html"><button type="button" class="btn btn-primary">Follow</button></a>
                                 <button type="button" class="btn btn-outline-primary ms-1">My Training's</button>
@@ -40,7 +40,7 @@
                                     <p class="mb-0">Full Name</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0" id="fullName">Johnatan Smith</p>
+                                    <p class="text-muted mb-0" id="fullName"></p>
                                 </div>
                             </div>
                             <hr>
@@ -49,7 +49,7 @@
                                     <p class="mb-0">Email</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0" id="email">example@example.com</p>
+                                    <p class="text-muted mb-0" id="email"></p>
                                 </div>
                             </div>
                             <hr>
@@ -58,7 +58,7 @@
                                     <p class="mb-0">Phone</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0" id="phoneNumber">(097) 234-5678</p>
+                                    <p class="text-muted mb-0" id="phoneNumber"></p>
                                 </div>
                             </div>
                             <hr>
@@ -67,7 +67,7 @@
                                     <p class="mb-0">Country</p>
                                 </div>
                                 <div class="col-sm-9">
-                                    <p class="text-muted mb-0" id="country">Bay Area, San Francisco, CA</p>
+                                    <p class="text-muted mb-0" id="country"></p>
                                 </div>
                             </div>
                         </div>
@@ -81,20 +81,29 @@
     </section>
 
     <script>
-      
-const loggedInEmployeeEmail = localStorage.getItem('loggedInEmployeeEmail');
-const employeeData = JSON.parse(localStorage.getItem('employeeData')) || [];
+        document.addEventListener('DOMContentLoaded', function () {
+            // Get the employeeId from the query parameter
+            const params = new URLSearchParams(window.location.search);
+            const employeeId = params.get('employeeId');
 
-const loggedInEmployee = employeeData.find(employee => employee.email === loggedInEmployeeEmail);
+            // Retrieve the employee data using the employeeId
+            const employeeData = JSON.parse(localStorage.getItem('employeeData')) || [];
 
-if (loggedInEmployee) {
-    document.getElementById('main-name').textContent = `${loggedInEmployee.firstName} ${loggedInEmployee.lastName}`;
-    document.getElementById('fullName').textContent = `${loggedInEmployee.firstName} ${loggedInEmployee.lastName}`;
-    document.getElementById('email').textContent = loggedInEmployee.email;
-    document.getElementById('phoneNumber').textContent = loggedInEmployee.phoneNumber;
-    document.getElementById('country').textContent = loggedInEmployee.country;
-    document.getElementById('country-name').textContent = `${loggedInEmployee.country}, ${loggedInEmployee.state}`
-}
+            // Check if the employeeId is valid and within the data array bounds
+            if (employeeId >= 0 && employeeId < employeeData.length) {
+                const employee = employeeData[employeeId];
+                document.getElementById('main-name').textContent = `${employee.firstName} ${employee.lastName}`;
+                document.getElementById('job-title').textContent = 'Full Stack Developer'; // You can set the job title here
+                document.getElementById('fullName').textContent = `${employee.firstName} ${employee.lastName}`;
+                document.getElementById('email').textContent = employee.email;
+                document.getElementById('phoneNumber').textContent = employee.phoneNumber;
+                document.getElementById('country').textContent = employee.country;
+                document.getElementById('country-name').textContent = `${employee.country}, ${employee.state}`;
+            } else {
+                // Handle invalid employeeId (e.g., show an error message)
+                document.getElementById('main-name').textContent = 'Invalid Employee Profile';
+            }
+        });
     </script>
 </body>
 </html>
