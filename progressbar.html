@@ -8,54 +8,105 @@
 </head>
 <body>
     <div class="video-container" id="video-container">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/FovtaTAPIZw?si=VZTZQuXRi0XRXaPj" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+        <iframe id="youtube-player" width="560" height="315" src="https://www.youtube.com/embed/FovtaTAPIZw?enablejsapi=1" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
     </div>
     <div class="progress-container">
         <div class="progress-bar" id="progress"></div>
     </div>
+    <div id="progress-info">
+        <span id="progress-percentage">0%</span>
+        <span id="time-completed">0:00</span> / <span id="time-remaining">0:00</span>
+    </div>
     <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const progressBar = document.getElementById("progress");
-            const totalTime = 9 * 60 * 1000; // 9 minutes in milliseconds
-            let startTime;
-            let isPlaying = false;
-            let timeoutId;
+        // Load YouTube iframe API asynchronously
+        const tag = document.createElement('script');
+        tag.src = "https://www.youtube.com/iframe_api";
+        const firstScriptTag = document.getElementsByTagName('script')[0];
+        firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
 
-            function updateProgressBar() {
-                const currentTime = Date.now();
-                const elapsedTime = currentTime - startTime;
-                const progress = (elapsedTime / totalTime) * 100;
+        let player;
+        let progressBar = document.getElementById("progress");
+        let progressPercentage = document.getElementById("progress-percentage");
+        let timeCompleted = document.getElementById("time-completed");
+        let timeRemaining = document.getElementById("time-remaining");
+        let isPlaying = false;
+        let progressInterval;
 
-                if (progress <= 100) {
-                    progressBar.style.width = progress + "%";
-                    timeoutId = setTimeout(updateProgressBar, 100); // Update every 100ms
-                } else {
-                    progressBar.style.width = "100%";
-                }
-            }
+        let lastTime = 0; // Variable to track the last time recorded
 
-            function startProgressBar() {
-                if (!isPlaying) {
-                    isPlaying = true;
-                    startTime = Date.now();
-                    updateProgressBar();
-                }
-            }
+        // Retrieve progress from localStorage
+        const savedProgress = localStorage.getItem("videoProgress");
+        if (savedProgress) {
+            lastTime = parseFloat(savedProgress);
+        }
 
-            function stopProgressBar() {
-                isPlaying = false;
-                clearTimeout(timeoutId);
-            }
-
-            // Add a click event listener to start/stop the progress bar when the video container is clicked
-            const videoContainer = document.getElementById("video-container");
-            videoContainer.addEventListener("click", () => {
-                if (isPlaying) {
-                    stopProgressBar();
-                } else {
-                    startProgressBar();
+        function onYouTubeIframeAPIReady() {
+            player = new YT.Player('youtube-player', {
+                events: {
+                    'onStateChange': onPlayerStateChange
                 }
             });
+        }
+
+        function onPlayerStateChange(event) {
+            if (event.data == YT.PlayerState.PLAYING) {
+                isPlaying = true;
+                startProgressBar();
+            } else {
+                isPlaying = false;
+                stopProgressBar();
+            }
+        }
+
+        function startProgressBar() {
+            if (!isPlaying) {
+                return;
+            }
+            progressInterval = setInterval(updateProgressBar, 100);
+        }
+
+        function stopProgressBar() {
+            clearInterval(progressInterval);
+        }
+
+        function updateProgressBar() {
+            if (!player || !isPlaying) {
+                return;
+            }
+
+            const currentTime = player.getCurrentTime();
+            const duration = player.getDuration();
+            let progress = (currentTime / duration) * 100;
+
+            // Only update the progress if the user hasn't jumped ahead
+            if (currentTime > lastTime) {
+                progressBar.style.width = progress + "%";
+                progressPercentage.textContent = progress.toFixed(1) + "%";
+
+                // Calculate time completed and remaining
+                const minutesCompleted = Math.floor(currentTime / 60);
+                const secondsCompleted = Math.floor(currentTime % 60);
+                timeCompleted.textContent = `${minutesCompleted}:${(secondsCompleted < 10 ? '0' : '') + secondsCompleted}`;
+
+                const minutesRemaining = Math.floor((duration - currentTime) / 60);
+                const secondsRemaining = Math.floor((duration - currentTime) % 60);
+                timeRemaining.textContent = `${minutesRemaining}:${(secondsRemaining < 10 ? '0' : '') + secondsRemaining}`;
+
+                lastTime = currentTime;
+
+                // Save progress to localStorage
+                localStorage.setItem("videoProgress", currentTime.toString());
+            }
+        }
+
+        // Add a click event listener to start/stop the video
+        const videoContainer = document.getElementById("video-container");
+        videoContainer.addEventListener("click", () => {
+            if (isPlaying) {
+                player.pauseVideo();
+            } else {
+                player.playVideo();
+            }
         });
     </script>
 </body>
