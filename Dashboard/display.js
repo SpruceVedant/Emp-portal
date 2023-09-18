@@ -12,7 +12,7 @@ document.addEventListener('DOMContentLoaded', function () {
             const employeeRow = `
                 <tr>
                     <td>Employee ${index + 1}</td>
-                    <td><a href="http://localhost:3001/Profile/Profile.html?employeeId=${index}">${employee.firstName} ${employee.lastName}</a></td>
+                    <td><a href="http://localhost:3000/Profile/Profile.html?employeeId=${index}">${employee.firstName} ${employee.lastName}</a></td>
                     <td>${employee.phoneNumber}</td>
                     <td>${employee.email}</td>
                     <td>${employee.country}</td>
