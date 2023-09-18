@@ -14,15 +14,16 @@
         <nav id="sidebarMenu" class="collapse d-lg-block sidebar collapse bg-white">
             <div class="position-sticky">
                 <div class="list-group list-group-flush mx-3 mt-4">
-                    <a href="#" class="list-group-item list-group-item-action py-2 ripple active" data-tab-id="dashboard-tab" data-tab-src="http://localhost:3000/Dashboard/display.html">
+                    <a href="#" class="list-group-item list-group-item-action py-2 ripple active" data-tab-id="dashboard-tab" data-tab-src="">
                         <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Main dashboard</span>
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action py-2 ripple" data-tab-id="add-employee-tab" data-tab-src="http://localhost:3000/Dashboard/index.html">
-                      <i class="fas fa-chart-area fa-fw me-3"></i><span>Add Employee</span>
-                  </a>
-                    <a href="#" class="list-group-item list-group-item-action py-2 ripple" data-tab-id="employee-detail-tab" data-tab-src="employee-detail.html">
+                    <a href="#" class="list-group-item list-group-item-action py-2 ripple admin-only" data-tab-id="add-employee-tab" data-tab-src="http://localhost:3000/Dashboard/index.html">
+                        <i class="fas fa-chart-area fa-fw me-3"></i><span>Add Employee</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action py-2 ripple admin-only" data-tab-id="employee-detail-tab" data-tab-src="http://localhost:3000/Dashboard/display.html">
                         <i class="fas fa-lock fa-fw me-3"></i><span>Employee Detail</span>
                     </a>
+
                     <a href="signup.html" class="list-group-item list-group-item-action py-2 ripple">
                         <i class="fas fa-chart-line fa-fw me-3"></i><span>Logout</span>
                     </a>

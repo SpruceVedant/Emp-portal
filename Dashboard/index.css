@@ -1,53 +1,89 @@
-/* Add your styling for the admin portal here */
+/* Updated styling for the admin portal */
+body {
+   background-color: #f7f7f7;
+   font-family: Arial, sans-serif;
+   margin: 0;
+   padding: 0;
+}
+
 .admin-container {
-    max-width: 600px;
-    margin: 0 auto;
-    padding: 20px;
- background-color: #fff;
- border-radius: 5px;
-    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
-     text-align: left;
-    }
-    
-    
-    h2 { margin-top: 20px;
-font-size: 20px; color: #333;
-    }
-    
-    
-    .profile p {
-    margin: 5px 0;
-    font-weight: bold;
-    }
-    
-    
-    form {
-     margin-top: 20px;
-    }
-    
-    
-    input[type="text"],
-    input[type="email"],
-    select {
-     width: 100%;
-    padding: 10px;
-     margin: 5px 0;
-    border: 1px solid #ccc;
-    border-radius: 3px;
-    }
-    
-    
-    button {
- background-color: #007bff;
-  color: #fff;
-padding: 10px 20px;
-border: none;
- border-radius: 3px;
-    cursor: pointer;
-    }
-    
-    
-    button:hover {
-     background-color: #0056b3;
-    }
-    
+   max-width: 600px;
+   margin: 0 auto;
+   padding: 20px;
+   background-color: #ffffff;
+   border-radius: 10px;
+   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+   text-align: left;
+   transition: all 0.3s ease;
+}
+
+h2 {
+   margin-top: 20px;
+   font-size: 24px;
+   color: #333;
+   text-align: center;
+}
+
+.profile p {
+   margin: 5px 0;
+   font-weight: bold;
+}
+
+form {
+   margin-top: 20px;
+   text-align: center;
+}
+
+input[type="text"],
+input[type="email"],
+select {
+   width: 100%;
+   padding: 10px;
+   margin: 10px 0; /* Added margin */
+   border: 1px solid #ccc;
+   border-radius: 5px;
+}
+
+button {
+   background-color: #007bff;
+   color: #fff;
+   padding: 12px 24px;
+   border: none;
+   border-radius: 5px;
+   cursor: pointer;
+   transition: background-color 0.3s ease;
+}
+
+button:hover {
+   background-color: #0056b3;
+}
+
+#employee-form {
+   text-align: left;
+}
+
+#employee-form label {
+   display: block;
+   font-weight: bold;
+   margin-top: 10px;
+}
+
+#employee-form select {
+   width: 100%;
+   padding: 10px;
+   margin-top: 10px; /* Added margin */
+   border: 1px solid #ccc;
+   border-radius: 5px;
+}
+
+/* Animation for form container */
+.admin-container:hover {
+   transform: scale(1.02);
+   box-shadow: 0px 0px 30px rgba(0, 0, 0, 0.2);
+}
+
+/* Animation for button */
+button:hover {
+   background-color: #0056b3;
+   transform: scale(1.05);
+}

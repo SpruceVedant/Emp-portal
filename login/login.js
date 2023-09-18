@@ -4,7 +4,7 @@ function isAdmin(email) {
     console.log(adminEmail);
     return email === adminEmail;
        }
-       
+
       //  Employee
        function isEmployee(email) {
          const employeeData = JSON.parse(localStorage.getItem('employeeData')) || [];
@@ -16,20 +16,20 @@ function isAdmin(email) {
        if (!adminEmail) {
     localStorage.setItem('adminEmail', 'admin@example.com');
        }
-       
-       
+
+
        // Handle login button click
        document.getElementById('login-btn').addEventListener('click', function () {
     const email = document.getElementById('email').value;
-       
+
     if (isAdmin(email)) {
     //    window.location.href = '/dashboard/dashboard.html';
-    location.assign('/Dashboard/index.html')
+    location.assign('/User/index.html')
        console.log('logged in as admin')
     } else if(isEmployee(email)){
       console.log("employee logged in")
       localStorage.setItem('loggedInEmployeeEmail', email);
-      location.assign('/Profile/Profile.html');
+      location.assign('/User/index.html');
     }
     else {
        alert('Invalid email. Please try again.');
@@ -41,7 +41,7 @@ function isAdmin(email) {
 
 
 
-       
+
 
 
 
@@ -74,4 +74,3 @@ function isAdmin(email) {
 
 
 
-    

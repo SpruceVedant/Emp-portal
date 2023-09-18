@@ -1,5 +1,3 @@
-// dashboard.js
-
 document.addEventListener('DOMContentLoaded', function () {
   // Sidebar toggling functionality
   const sidebarMenu = document.getElementById('sidebarMenu');
@@ -26,4 +24,15 @@ document.addEventListener('DOMContentLoaded', function () {
       tab.classList.add('active');
     });
   });
+
+  // Check if the user is an admin or employee (you can set this based on your login logic)
+  const isAdmin = true; // Replace with your logic to determine admin/employee
+
+  // Hide "admin-only" links for employees
+  if (!isAdmin) {
+    const adminOnlyLinks = document.querySelectorAll('.admin-only');
+    adminOnlyLinks.forEach((link) => {
+      link.style.display = 'none';
+    });
+  }
 });
